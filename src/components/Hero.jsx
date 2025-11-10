@@ -20,23 +20,18 @@ export default function Hero() {
 
   return (
     <section id="home" ref={ref} className="relative min-h-[100svh] w-full overflow-hidden bg-[#0A0A0A]">
-      <div className="absolute inset-0">        
+      <div className="absolute inset-0">
         <Spline scene="https://prod.spline.design/EF7JOSsHLk16Tlw9/scene.splinecode" style={{ width: '100%', height: '100%' }} />
       </div>
 
+      {/* Gradient overlays should not block 3D interaction */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-[#0A0A0A]" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0A0A0A] to-transparent" />
 
-      <header className="relative z-10 flex items-center justify-between px-6 md:px-10 py-6">
-        <nav className="flex items-center gap-6 text-[#D1D5DB]">
-          {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href} className="group text-sm md:text-base tracking-wide uppercase">
-              <span className="transition-colors group-hover:text-[#FF4C00]">{link.label}</span>
-              <span className="block h-0.5 scale-x-0 bg-[#FF4C00] transition-transform duration-300 group-hover:scale-x-100" />
-            </a>
-          ))}
-        </nav>
-        <a href="#home" className="flex items-center gap-2 text-[#F5F5F5]">
+      {/* Header with centered nav bar */}
+      <header className="pointer-events-none absolute inset-x-0 top-0 z-10 flex flex-col items-center gap-4 px-6 md:px-10 py-6">
+        {/* Brand pinned to the left (clickable) */}
+        <a href="#home" className="pointer-events-auto absolute left-6 md:left-10 top-6 flex items-center gap-2 text-[#F5F5F5]">
           <motion.div
             initial={{ rotate: -10 }}
             animate={{ rotate: 0 }}
@@ -47,9 +42,19 @@ export default function Hero() {
           </motion.div>
           <span className="font-semibold tracking-wide">RetroVision</span>
         </a>
+
+        {/* Centered Nav */}
+        <nav className="pointer-events-auto mt-8 flex flex-wrap items-center justify-center gap-6 text-[#D1D5DB]">
+          {NAV_LINKS.map((link) => (
+            <a key={link.href} href={link.href} className="group text-sm md:text-base tracking-wide uppercase">
+              <span className="transition-colors group-hover:text-[#FF4C00]">{link.label}</span>
+              <span className="block h-0.5 scale-x-0 bg-[#FF4C00] transition-transform duration-300 group-hover:scale-x-100" />
+            </a>
+          ))}
+        </nav>
       </header>
 
-      <motion.div style={{ scale, y, opacity }} className="relative z-10 mx-auto mt-24 flex max-w-5xl flex-col items-center px-6 text-center md:mt-32">
+      <motion.div style={{ scale, y, opacity }} className="relative z-10 mx-auto mt-28 md:mt-32 flex max-w-5xl flex-col items-center px-6 text-center">
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
